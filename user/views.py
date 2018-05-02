@@ -16,18 +16,18 @@ def LoginUser(request):
                 auth.login(request, user)
                 return HttpResponseRedirect("/user/dashboard/")
             else:
-                messages.error(request, '✘ You are Admin User please Login via AdminLogin')
+                messages.error(request, '✘ You are Admin User Please Login via ', extra_tags='safe')
                 return HttpResponseRedirect('/user/login/')
         else:
             messages.error(request, '✘ Incorrect Username and Password!')
             return HttpResponseRedirect('/user/login/')
     else:
         form = AuthenticationForm()
-        return render(request, 'OMTMS/login.html', {'form': form})
+        return render(request, 'user/login.html', {'form': form})
     
     
 def Dashboard(request):
-    return render(request,"OMTMS/dashboard.html")
+    return render(request,"user/dashboard.html")
 
 def LogoutUser(request):
     auth.logout(request)
@@ -44,11 +44,11 @@ def Registration(request):
             return HttpResponseRedirect('/user/login/')
     else:
         form=RegistrationForm()
-    return render(request, 'OMTMS/registration.html', {'form': form})
+    return render(request, 'user/registration.html', {'form': form})
 
 
 def Homepage(request):
-    return render(request, 'OMTMS/homepage.html') 
+    return render(request, 'user/homepage.html') 
 
 
 
