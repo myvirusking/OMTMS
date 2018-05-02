@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-danger container" > {{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+      <div align="center" class="jumbotron">
+      {{ form.as_p }}
+      <button type="submit">Login</button>
+       </div>
+</form>
