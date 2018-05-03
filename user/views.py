@@ -3,6 +3,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import *
 from .models import *
 from .forms import *
+from django.db.models import Q
+from django.template.context_processors import request
+import re
 
 # Create your views here.
 def LoginUser(request):
@@ -51,13 +54,21 @@ def Homepage(request):
     return render(request, 'user/homepage.html') 
 
 
+def Movietheater(request):
+    if request.method=="POST":
+        value=request.POST['placen']
+        obj=MovieTheater.objects.filter(Q(theaterplace__icontains=value[0:3]))
+        print(obj)
+        if obj:
+            return render(request, 'user/movietheater.html',{'obj':obj})
+        else: 
+            return render(request, 'user/movietheater.html')
+    else:
+        return render(request, 'user/movietheater.html') 
 
 
-
-
-
-
-
-
+def Moviename(request,pk):
+    print(pk)
+    pass
 
 

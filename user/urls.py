@@ -8,4 +8,6 @@ urlpatterns = [
     path('dashboard/',Dashboard),
     path('logout/',LogoutUser,name='logout'),
     path('registration/',Registration,name='registration'),
+    path('movietheater/',Movietheater,name='movietheater'),
+    path('movietheater/<int:pk>/moviename/',Moviename,name='moviename'),
 ]
