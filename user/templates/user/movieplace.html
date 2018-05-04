@@ -4,13 +4,14 @@
 	<form method="post">
 	 {% csrf_token %}
 	   <div class="col-md-4" style="text-align: left">
-	      <input type="text" name="placen" list="placename"/>
+	      <input class="form-control" type="text" name="placen" list="placename"/>
 			<datalist id="placename">
 			    <option value="Ulhasnagar">ULH</option>
 			    <option value="Kalyan">KYN</option>
 			    <option value="Thane">TH</option>
 			</datalist>
-			<button class="btn btn-success">Go</button>
+			<br>
+			<div align="center"><button class="btn btn-success" style="padding-left: 50px;padding-right: 50px;">Go</button></div>
 	   </div>
 	</form>
 </div>
