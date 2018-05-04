@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
+{% if messages %}
+    {% for message in messages %}
+    	{% if 'safe' in message.tags %}
+    		<div class="alert alert-danger container" > {{ message }}<a href="{% url "myadmin:login" %}">AdminLogin</a></div>
+    	{% else %}
+        	<div class="alert alert-danger container" > {{ message }}</div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+      <div align="center" class="jumbotron">
+      {{ form.as_p }}
+      <button class="btn btn-success" type="submit">Login</button>
+       </div>
+</form>

@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
+<div align="center" class="jumbotron">
+	<form method="post">
+	 {% csrf_token %}
+	   <div class="col-md-4" style="text-align: left">
+	      {{ form.as_p }}
+	   </div>
+	   <button class="btn btn-success">Register</button>
+	</form>
+</div>
+
