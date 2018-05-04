@@ -21,3 +21,5 @@ git add readme.txt
 git commit -m "first commit"
 git remote add origin yourHTTPSreprolink (ex. "https://github.com/foldername/gitreproname.git")
 git push -u origin master
+
+Thank You
