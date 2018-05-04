@@ -17,3 +17,11 @@ class MovieTheater(models.Model):
     
     def __str__(self):
         return "{0}({1})".format(self.theatername,self.theaterplace)
+    
+class MovieName(models.Model):
+    theater=models.ForeignKey(MovieTheater, on_delete=models.CASCADE)
+    moviename=models.CharField(max_length=50)
+    language=models.CharField(max_length=10,default="Hindi")
+    
+    def __str__(self):
+        return "{0}({1}-{2})".format(self.moviename,self.theater.theatername,self.theater.theaterplace)

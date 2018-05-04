@@ -3,15 +3,27 @@
 <br>
 <div class="container">
 	<div class="row">
-		<div class="col-md-3">
-			<img src="{% static "images/Avengers-Web-Poster.jpg"%}">
-			<font size="4" color="light blue"><i>Avengers:Infinity War</i></font>
-			<br>
-			<p><font size="2" color="green	"><i>(Hindi)</i></font></p>
-			 <button type="button" class="btn btn-warning" style="padding-left: 90px;padding-right: 90px;">BOOK</button>
-		</div>
+	{% if mylist %}
+		{% for i,j,k in mylist %}
+				<div class="col-md-3">
+					<img src="{% static j %}">
+					<font size="4" color="light blue"><i>{{ i }}</i></font>
+					<br>
+					<p><font size="2" color="green	"><i>({{ k }})</i></font></p>
+					 <button type="button" class="btn btn-warning" style="padding-left: 90px;padding-right: 90px;margin-bottom: 30px;">BOOK</button>
+				</div>
+		{% endfor %}
 		
-		<div class="col-md-3">
+	{% else %}
+		<h1>No Movie Now Available. Please Wait For Update...</h1>
+	
+	{% endif %}
+	</div>
+</div>
+
+
+
+<!--<div class="col-md-3">
 			<img src="{% static "images/Avengers-Web-Poster.jpg"%}">
 			<font size="4" color="light blue"><i>Avengers:Infinity War</i></font>
 			<br>
@@ -28,12 +40,10 @@
 		</div>
 		
 			<div class="col-md-3">
-			<img src="{% static "images/102-not-out-Web-Poster.jpg"%}">
-			<font size="4" color="light blue"><i>102 Not Out</i></font>
+			<img src="{% static "images/Sanju-App-Poster.jpg"%}">
+			<font size="4" color="light blue"><i>Sanju</i></font>
 			<br>
 			<p><font size="2" color="green	"><i>(Hindi)</i></font></p>
 			 <button type="button" class="btn btn-warning" style="padding-left: 90px;padding-right: 90px;">BOOK</button>
 		</div>
-	</div>
-	
-</div>
+-->

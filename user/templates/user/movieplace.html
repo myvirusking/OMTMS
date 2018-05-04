@@ -8,7 +8,7 @@
 			<datalist id="placename">
 			    <option value="Ulhasnagar">ULH</option>
 			    <option value="Kalyan">KYN</option>
-			    <option value="Mumbai">MUM</option>
+			    <option value="Thane">TH</option>
 			</datalist>
 			<button class="btn btn-success">Go</button>
 	   </div>
@@ -18,7 +18,7 @@
 
 {% if obj %}
 	{% for i in obj %}
-	    <a href="{% url "user:movieplace" place=i.theaterplace %}"><h2>{{ i.theatername }}({{ i.theaterplace }})</h2></a>
+	    <a href="{% url "user:movieplace" place=i.theaterplace pk=i.id %}"><h2>{{ i.theatername }}({{ i.theaterplace }})</h2></a>
 	    
     	<br>
 	{% endfor %}

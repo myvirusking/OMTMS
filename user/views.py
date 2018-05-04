@@ -5,36 +5,42 @@ from .models import *
 from .forms import *
 from django.db.models import Q
 from django.template.context_processors import request
-import re
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def LoginUser(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = auth.authenticate(username=username, password=password)
-        user_type=[i.myuser.username for i in MyUser.objects.all()]
-        if user:
-            if user.username in user_type:
-                auth.login(request, user)
-                return HttpResponseRedirect("/user/dashboard/")
+    if not request.user.is_authenticated:
+        if request.method == "POST":
+            username = request.POST['username']
+            password = request.POST['password']
+            user = auth.authenticate(username=username, password=password)
+            user_type=[i.myuser.username for i in MyUser.objects.all()]
+            if user:
+                if user.username in user_type:
+                    auth.login(request, user)
+                    return HttpResponseRedirect("/user/dashboard/")
+                else:
+                    messages.error(request, '✘ You are Admin User Please Login via ', extra_tags='safe')
+                    return HttpResponseRedirect('/user/login/')
             else:
-                messages.error(request, '✘ You are Admin User Please Login via ', extra_tags='safe')
+                messages.error(request, '✘ Incorrect Username and Password!')
                 return HttpResponseRedirect('/user/login/')
         else:
-            messages.error(request, '✘ Incorrect Username and Password!')
-            return HttpResponseRedirect('/user/login/')
+            form = AuthenticationForm()
+            return render(request, 'user/login.html', {'form': form})
     else:
-        form = AuthenticationForm()
-        return render(request, 'user/login.html', {'form': form})
+        return HttpResponseRedirect('/user/dashboard/')
     
     
+@login_required(login_url="/user/login/")
 def Dashboard(request):
     return render(request,"user/dashboard.html")
+
 
 def LogoutUser(request):
     auth.logout(request)
     return HttpResponseRedirect('/user/login/')
+
 
 def Registration(request):
     if request.method=="POST":
@@ -43,7 +49,7 @@ def Registration(request):
             form.save()
             myusr=User.objects.get(username=request.POST['username'])
             MyUser.objects.create(myuser=myusr)
-            #messages.success(request, 'You Account Registered Successfully!')
+            messages.success(request, 'You Account Registered Successfully!')
             return HttpResponseRedirect('/user/login/')
     else:
         form=RegistrationForm()
@@ -54,6 +60,7 @@ def Homepage(request):
     return render(request, 'user/homepage.html') 
 
 
+@login_required(login_url="/user/login/")
 def Moveplace(request):
     if request.method=="POST":
         value=request.POST['placen']
@@ -66,7 +73,20 @@ def Moveplace(request):
         return render(request, 'user/movieplace.html') 
 
 
-def Moviename(request,place):
-    return render(request, 'user/moviename.html') 
+@login_required(login_url="/user/login/")
+def Moviename(request,pk,place):
+    theater_obj=MovieTheater.objects.filter(id=pk)
+    mylist=[]
+    for i in theater_obj:
+        theater_name=i.theatername
+    
+    obj=MovieName.objects.all()
+    for i in obj:
+        if i.theater.theatername == theater_name:
+            image_name="images/{}.jpg".format(i.moviename)
+            mylist.append((i.moviename,image_name,i.language))
+            
+    
+    return render(request, 'user/moviename.html',{'mylist':mylist}) 
 
 

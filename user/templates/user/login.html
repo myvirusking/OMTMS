@@ -4,7 +4,9 @@
     {% for message in messages %}
     	{% if 'safe' in message.tags %}
     		<div class="alert alert-danger container" > {{ message }}<a href="{% url "myadmin:login" %}">AdminLogin</a></div>
-    	{% else %}
+    	{% elif 'success' in message.tags  %}
+    		<div class="alert alert-success container" > {{ message }}</div>
+    	{% else  %}
         	<div class="alert alert-danger container" > {{ message }}</div>
         {% endif %}
     {% endfor %}
@@ -15,5 +17,7 @@
       <div align="center" class="jumbotron">
       {{ form.as_p }}
       <button class="btn btn-success" type="submit">Login</button>
+      <br> <br>
+      <a href="{% url "user:registration" %}">Not Yet Register?</a>
        </div>
 </form>
