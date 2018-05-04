@@ -18,7 +18,7 @@
 
 {% if obj %}
 	{% for i in obj %}
-	    <a href="{% url "user:moviename" pk=i.id %}"><h2>{{ i.theatername }}</h2></a>
+	    <a href="{% url "user:movieplace" place=i.theaterplace %}"><h2>{{ i.theatername }}({{ i.theaterplace }})</h2></a>
 	    
     	<br>
 	{% endfor %}

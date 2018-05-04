@@ -54,21 +54,19 @@ def Homepage(request):
     return render(request, 'user/homepage.html') 
 
 
-def Movietheater(request):
+def Moveplace(request):
     if request.method=="POST":
         value=request.POST['placen']
         obj=MovieTheater.objects.filter(Q(theaterplace__icontains=value[0:3]))
-        print(obj)
         if obj:
-            return render(request, 'user/movietheater.html',{'obj':obj})
+            return render(request, 'user/movieplace.html',{'obj':obj})
         else: 
-            return render(request, 'user/movietheater.html')
+            return render(request, 'user/movieplace.html')
     else:
-        return render(request, 'user/movietheater.html') 
+        return render(request, 'user/movieplace.html') 
 
 
-def Moviename(request,pk):
-    print(pk)
-    pass
+def Moviename(request,place):
+    return render(request, 'user/moviename.html') 
 
 
