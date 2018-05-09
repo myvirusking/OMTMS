@@ -9,7 +9,7 @@ urlpatterns = [
     path('logout/',LogoutUser,name='logout'),
     path('registration/',Registration,name='registration'),
     path('movies/',Moveplace,name='movies'),
-    path('movies/?error<int:pk>/<slug:place>/',Moviename,name='movieplace'),
-    #path('movies/<slug:place>/moviename/',Moviename,name='moviename'),
+    path('movies/<int:pk>/<slug:place>/',Moviename,name='movieplace'),
+    path('movies/<int:pk>/<slug:place>/<str:moviename>/<slug:language>/',Movieticket,name='movieticket'),
     
 ]

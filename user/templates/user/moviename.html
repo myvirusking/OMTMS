@@ -10,7 +10,8 @@
 					<font size="4" color="light blue"><i>{{ i }}</i></font>
 					<br>
 					<p><font size="2" color="green	"><i>({{ k }})</i></font></p>
-					 <button type="button" class="btn btn-warning" style="padding-left: 90px;padding-right: 90px;margin-bottom: 30px;">BOOK</button>
+					 <button type="button" class="btn btn-warning" style="padding-left: 90px;padding-right: 90px;margin-bottom: 30px;"
+					 onclick="location.href = '{% url "user:movieticket" pk=pk place=place moviename=i language=k %}';">BOOK</button>
 				</div>
 		{% endfor %}
 		

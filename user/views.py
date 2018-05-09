@@ -85,8 +85,31 @@ def Moviename(request,pk,place):
         if i.theater.theatername == theater_name:
             image_name="images/{}.jpg".format(i.moviename)
             mylist.append((i.moviename,image_name,i.language))
-            
     
-    return render(request, 'user/moviename.html',{'mylist':mylist}) 
+    return render(request, 'user/moviename.html',{'mylist':mylist,"pk":pk,"place":place}) 
+
+
+def Movieticket(request,pk,place,moviename,language):
+    username="vinay"
+    for i in MyUser.objects.all():
+        if i.myuser.username==username:
+            Tmyuser=i
+    print(Tmyuser)
+    theater=MovieTheater.objects.get(id=pk)
+    for i in MovieName.objects.filter(moviename=moviename,language=language,theater=theater):
+        Tmoviename=i
+    print(Tmoviename)
+    Tdate="2018-05-09"
+    Ttime="19:34:42"
+
+    return render(request, 'user/movieticket.html')
+    
+
+
+
+
+
+
+
 
 
